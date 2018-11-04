@@ -89,6 +89,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
             if (SelectedWallet == null) return;
 
             StationManager.CurrentUser.Wallets.RemoveAll(uwr => uwr.Guid == SelectedWallet.Guid);
+            DBManager.UpdateUser(StationManager.CurrentUser);
             FillWallets();
             OnPropertyChanged(nameof(SelectedWallet));
             OnPropertyChanged(nameof(Wallets));

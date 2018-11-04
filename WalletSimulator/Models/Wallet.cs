@@ -2,6 +2,7 @@
 
 namespace KMA.APZRPMJ2018.WalletSimulator.Models
 {
+    [Serializable]
     public class Wallet
     {
         #region Fields

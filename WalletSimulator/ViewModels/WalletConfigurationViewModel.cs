@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using KMA.APZRPMJ2018.WalletSimulator.Managers;
 using KMA.APZRPMJ2018.WalletSimulator.Models;
 using KMA.APZRPMJ2018.WalletSimulator.Properties;
 
@@ -46,6 +47,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
         [NotifyPropertyChangedInvocator]
         internal virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            DBManager.UpdateUser(StationManager.CurrentUser);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion

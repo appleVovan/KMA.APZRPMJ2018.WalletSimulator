@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -91,15 +94,21 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Managers\LoaderManager.cs" />
     <Compile Include="Managers\NavigationManager.cs" />
     <Compile Include="Managers\DBManager.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Tools\Encrypting.cs" />
+    <Compile Include="Tools\FileFolderHelper.cs" />
     <Compile Include="Tools\IContentWindow.cs" />
+    <Compile Include="Tools\ILoaderOwner.cs" />
+    <Compile Include="Tools\Logger.cs" />
     <Compile Include="Tools\NavigationModel.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
+    <Compile Include="Managers\SerializationManager.cs" />
     <Compile Include="ViewModels\Authentication\SignUpViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\WalletConfigurationViewModel.cs" />
     <Compile Include="Views\Authentication\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
@@ -177,6 +186,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

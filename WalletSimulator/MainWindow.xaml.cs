@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using KMA.APZRPMJ2018.WalletSimulator.Managers;
 using KMA.APZRPMJ2018.WalletSimulator.Tools;
+using KMA.APZRPMJ2018.WalletSimulator.ViewModels;
 
 namespace KMA.APZRPMJ2018.WalletSimulator
 {
@@ -14,7 +15,9 @@ namespace KMA.APZRPMJ2018.WalletSimulator
             InitializeComponent();
             var navigationModel = new NavigationModel(this);
             NavigationManager.Instance.Initialize(navigationModel);
-            navigationModel.Navigate(ModesEnum.SignIn);
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+            DataContext = mainWindowViewModel;
+            mainWindowViewModel.StartApplication();
         }
 
         public ContentControl ContentControl

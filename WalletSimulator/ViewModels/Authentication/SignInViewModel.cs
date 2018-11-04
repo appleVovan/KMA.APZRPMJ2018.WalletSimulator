@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using KMA.APZRPMJ2018.WalletSimulator.Managers;
@@ -82,40 +83,47 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels.Authentication
             NavigationManager.Instance.Navigate(ModesEnum.SingUp);
         }
 
-        private void SignInExecute(object obj)
+        private async void SignInExecute(object obj)
         {
-            User currentUser;
-            try
+            LoaderManager.Instance.ShowLoader();
+            var result = await Task.Run(() =>
             {
-                currentUser = DBManager.GetUserByLogin(_login);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(String.Format(Resources.SignIn_FailedToGetUser, Environment.NewLine,
-                    ex.Message));
-                return;
-            }
-            if (currentUser == null)
-            {
-                MessageBox.Show(String.Format(Resources.SignIn_UserDoesntExist, _login));
-                return;
-            }
-            try
-            {
-                if (!currentUser.CheckPassword(_password))
+                User currentUser;
+                try
                 {
-                    MessageBox.Show(Resources.SignIn_WrongPassword);
-                    return;
+                    currentUser = DBManager.GetUserByLogin(_login);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(String.Format(Resources.SignIn_FailedToValidatePassword, Environment.NewLine,
-                    ex.Message));
-                return;
-            }
-            StationManager.CurrentUser = currentUser;
-            NavigationManager.Instance.Navigate(ModesEnum.Main);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(String.Format(Resources.SignIn_FailedToGetUser, Environment.NewLine,
+                        ex.Message));
+                    return false;
+                }
+                if (currentUser == null)
+                {
+                    MessageBox.Show(String.Format(Resources.SignIn_UserDoesntExist, _login));
+                    return false;
+                }
+                try
+                {
+                    if (!currentUser.CheckPassword(_password))
+                    {
+                        MessageBox.Show(Resources.SignIn_WrongPassword);
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(String.Format(Resources.SignIn_FailedToValidatePassword, Environment.NewLine,
+                        ex.Message));
+                    return false;
+                }
+                StationManager.CurrentUser = currentUser;
+                return true;
+            });
+            LoaderManager.Instance.HideLoader();
+            if (result)
+                NavigationManager.Instance.Navigate(ModesEnum.Main);
         }
 
         private bool SignInCanExecute(object obj)

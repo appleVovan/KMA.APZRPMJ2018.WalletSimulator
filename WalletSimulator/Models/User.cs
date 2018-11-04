@@ -4,6 +4,7 @@ using KMA.APZRPMJ2018.WalletSimulator.Tools;
 
 namespace KMA.APZRPMJ2018.WalletSimulator.Models
 {
+    [Serializable]
     public class User
     {
         #region Const
@@ -138,25 +139,41 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
 
         private void SetPassword(string password)
         {
-            _password = Encrypting.EncryptText(password, PubblicKey);
+            _password = Encrypting.GetMd5HashForString(password);
         }
         public bool CheckPassword(string password)
         {
             try
             {
-                string res = Encrypting.DecryptString(_password, PrivateKey);
+                //string res = Encrypting.DecryptString(_password, PrivateKey);
                 string res2 = Encrypting.GetMd5HashForString(password);
-                return res == res2;
+                return _password == res2;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool CheckPassword(User userCandidate)
+        {
+            try
+            {
+                //string res = Encrypting.DecryptString(_password, PrivateKey);
+                //string res2 = Encrypting.DecryptString(userCandidate._password, PrivateKey);
+                return _password == userCandidate._password;
             }
             catch (Exception)
             {
                 return false;
             }
         }
-        
+
         public override string ToString()
         {
             return $"{LastName} {FirstName}";
         }
+
+        
     }
 }
