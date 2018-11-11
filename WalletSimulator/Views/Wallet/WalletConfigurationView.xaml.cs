@@ -1,4 +1,5 @@
-﻿using KMA.APZRPMJ2018.WalletSimulator.ViewModels;
+﻿using KMA.APZRPMJ2018.WalletSimulator.Models;
+using KMA.APZRPMJ2018.WalletSimulator.ViewModels;
 
 namespace KMA.APZRPMJ2018.WalletSimulator.Views.Wallet
 {
@@ -7,7 +8,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Views.Wallet
     /// </summary>
     public partial class WalletConfigurationView
     {
-        public WalletConfigurationView(Models.Wallet wallet)
+        public WalletConfigurationView(WalletUIModel wallet)
         {
             InitializeComponent();
             var walletModel = new WalletConfigurationViewModel(wallet);

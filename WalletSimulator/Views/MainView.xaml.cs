@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using KMA.APZRPMJ2018.WalletSimulator.Models;
 using KMA.APZRPMJ2018.WalletSimulator.ViewModels;
 using KMA.APZRPMJ2018.WalletSimulator.Views.Wallet;
 
@@ -23,11 +24,11 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Views
         {
             Visibility = Visibility.Visible;
             _mainWindowViewModel = new MainViewViewModel();
-            _mainWindowViewModel.WalletChanged+= OnWalletChanged;
+            _mainWindowViewModel.WalletChanged += OnWalletChanged;
             DataContext = _mainWindowViewModel;
         }
 
-        private void OnWalletChanged(Models.Wallet wallet)
+        private void OnWalletChanged(WalletUIModel wallet)
         {
             if (_currentWalletConfigurationView == null)
             {

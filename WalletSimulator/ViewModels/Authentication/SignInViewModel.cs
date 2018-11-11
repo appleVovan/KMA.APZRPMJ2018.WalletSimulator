@@ -4,8 +4,8 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using KMA.APZRPMJ2018.WalletSimulator.DBModels;
 using KMA.APZRPMJ2018.WalletSimulator.Managers;
-using KMA.APZRPMJ2018.WalletSimulator.Models;
 using KMA.APZRPMJ2018.WalletSimulator.Properties;
 using KMA.APZRPMJ2018.WalletSimulator.Tools;
 

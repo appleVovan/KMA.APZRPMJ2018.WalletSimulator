@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using KMA.APZRPMJ2018.WalletSimulator.DBModels;
 using KMA.APZRPMJ2018.WalletSimulator.Managers;
 using KMA.APZRPMJ2018.WalletSimulator.Models;
 using KMA.APZRPMJ2018.WalletSimulator.Properties;
@@ -12,8 +13,8 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
     class MainViewViewModel : INotifyPropertyChanged
     {
         #region Fields
-        private Wallet _selectedWallet;
-        private ObservableCollection<Wallet> _wallets;
+        private WalletUIModel _selectedWallet;
+        private ObservableCollection<WalletUIModel> _wallets;
         #region Commands
         private ICommand _addWalletCommand;
         private ICommand _deleteWalletCommand;
@@ -41,11 +42,11 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
 
         #endregion
 
-        public ObservableCollection<Wallet> Wallets
+        public ObservableCollection<WalletUIModel> Wallets
         {
             get { return _wallets; }
         }
-        public Wallet SelectedWallet
+        public WalletUIModel SelectedWallet
         {
             get { return _selectedWallet; }
             set
@@ -60,8 +61,8 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
         #region Constructor
         public MainViewViewModel()
         {
-            FillWallets();
             PropertyChanged += OnPropertyChanged;
+            FillWallets();
         }
         #endregion
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -71,10 +72,10 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
         }
         private void FillWallets()
         {
-            _wallets = new ObservableCollection<Wallet>();
+            _wallets = new ObservableCollection<WalletUIModel>();
             foreach (var wallet in StationManager.CurrentUser.Wallets)
             {
-                _wallets.Add(wallet);
+                _wallets.Add(new WalletUIModel(wallet));
             }
             if (_wallets.Count > 0)
             {
@@ -89,7 +90,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
             if (SelectedWallet == null) return;
 
             StationManager.CurrentUser.Wallets.RemoveAll(uwr => uwr.Guid == SelectedWallet.Guid);
-            DBManager.UpdateUser(StationManager.CurrentUser);
+            DBManager.DeleteWallet(SelectedWallet.Wallet);
             FillWallets();
             OnPropertyChanged(nameof(SelectedWallet));
             OnPropertyChanged(nameof(Wallets));
@@ -98,16 +99,18 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
         private void AddWalletExecute(object o)
         {
             Wallet wallet = new Wallet("New Wallet", StationManager.CurrentUser);
-            _wallets.Add(wallet);
-            _selectedWallet = wallet;
+            DBManager.AddWallet(wallet);
+            var walletUIModel = new WalletUIModel(wallet);
+            _wallets.Add(walletUIModel);
+            _selectedWallet = walletUIModel;
         }
         
         #region EventsAndHandlers
         #region Loader
         internal event WalletChangedHandler WalletChanged;
-        internal delegate void WalletChangedHandler(Wallet wallet);
+        internal delegate void WalletChangedHandler(WalletUIModel wallet);
 
-        internal virtual void OnWalletChanged(Wallet wallet)
+        internal virtual void OnWalletChanged(WalletUIModel wallet)
         {
             WalletChanged?.Invoke(wallet);
         }

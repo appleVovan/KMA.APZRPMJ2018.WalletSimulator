@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using KMA.APZRPMJ2018.WalletSimulator.Models;
+using KMA.APZRPMJ2018.WalletSimulator.DBModels;
 using KMA.APZRPMJ2018.WalletSimulator.Tools;
 
 namespace KMA.APZRPMJ2018.WalletSimulator.Managers
@@ -39,7 +39,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Managers
                 CurrentUser = userCandidate;
         }
 
-        internal static void CloseApp()
+        public static void CloseApp()
         {
             MessageBox.Show("ShutDown");
             Environment.Exit(1);

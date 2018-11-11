@@ -1,46 +1,58 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using KMA.APZRPMJ2018.WalletSimulator.Managers;
-using KMA.APZRPMJ2018.WalletSimulator.Models;
+using KMA.APZRPMJ2018.WalletSimulator.DBModels;
 using KMA.APZRPMJ2018.WalletSimulator.Properties;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
+namespace KMA.APZRPMJ2018.WalletSimulator.Models
 {
-    internal class WalletConfigurationViewModel : INotifyPropertyChanged
+    public class WalletUIModel:INotifyPropertyChanged
     {
         #region Fields
-        private readonly WalletUIModel _currentWallet;
+        private Wallet _wallet;
         #endregion
 
         #region Properties
-        
+        internal Wallet Wallet
+        {
+            get { return _wallet; }
+            private set
+            {
+                _wallet = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Title
         {
-            get { return _currentWallet.Title; }
+            get { return _wallet.Title; }
             set
             {
-                _currentWallet.Title = value;
+                _wallet.Title = value;
                 OnPropertyChanged();
             }
         }
         public long TotalIncome
         {
-            get { return _currentWallet.TotalIncome; }
+            get { return _wallet.TotalIncome; }
         }
-        public long TotalOutCome
+        public long TotalOutcome
         {
-            get { return _currentWallet.TotalOutcome; }
+            get { return _wallet.TotalOutcome; }
         }
+
+        public Guid Guid
+        {
+            get { return _wallet.Guid; }
+        }
+
         #endregion
 
-        
-
-        #region Constructor
-        public WalletConfigurationViewModel(WalletUIModel wallet)
+        public WalletUIModel(Wallet wallet)
         {
-            _currentWallet = wallet;
+            _wallet = wallet;
         }
-        #endregion
+
         #region EventsAndHandlers
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,7 +63,5 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
         }
         #endregion
         #endregion
-
-
     }
 }
