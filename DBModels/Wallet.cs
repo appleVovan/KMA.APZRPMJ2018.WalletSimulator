@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Data.Entity.ModelConfiguration;
+using System.Runtime.Serialization;
 
 namespace KMA.APZRPMJ2018.WalletSimulator.DBModels
 {
+    [DataContract(IsReference = true)]
     public class Wallet
     {
         #region Fields
+        [DataMember]
         private Guid _guid;
+        [DataMember]
         private string _title;
+        [DataMember]
         private long _totalIncome;
+        [DataMember]
         private long _totalOutcome;
+        [DataMember]
         private Guid _userGuid;
+        [DataMember]
         private User _user;
         #endregion
 

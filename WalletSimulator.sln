@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managers", "KMA.APZRPMJ2018
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBAdapter", "KMA.APZRPMJ2018.WalletSimulator.DBAdapter\DBAdapter.csproj", "{ADC169A0-8200-4136-9BB5-2C3645F99916}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletService", "KMA.APZRPMJ2018.WalletSimulator.WalletService\WalletService.csproj", "{316E74C6-8E9A-4C98-9256-13275ECDD635}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletServiceInterface", "WalletServiceInterface\WalletServiceInterface.csproj", "{8ACA1AE4-D0C9-4AEF-97BB-6505FDA9C67A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{ADC169A0-8200-4136-9BB5-2C3645F99916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADC169A0-8200-4136-9BB5-2C3645F99916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADC169A0-8200-4136-9BB5-2C3645F99916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316E74C6-8E9A-4C98-9256-13275ECDD635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316E74C6-8E9A-4C98-9256-13275ECDD635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316E74C6-8E9A-4C98-9256-13275ECDD635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316E74C6-8E9A-4C98-9256-13275ECDD635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ACA1AE4-D0C9-4AEF-97BB-6505FDA9C67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ACA1AE4-D0C9-4AEF-97BB-6505FDA9C67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ACA1AE4-D0C9-4AEF-97BB-6505FDA9C67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ACA1AE4-D0C9-4AEF-97BB-6505FDA9C67A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
